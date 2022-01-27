@@ -5,14 +5,14 @@ import java.time.LocalDate;
 
 public class Clothes extends Product{
 	
+	private char size;
+	private String color;
+	
 	public Clothes(String name, String brand, float price, char size, String color) {
 		super(name, brand, price);
 		this.size = size;
 		this.color = color;
 	}
-
-	private char size;
-	private String color;
 	
 	public float getDiscount() {
 		float discount;

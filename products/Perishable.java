@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Perishable extends Product{
-
+	
+	protected LocalDate expirationDate;
 
 	public Perishable(String name, String brand, float price, LocalDate expirationDate) {
 		super(name,brand,price);
 		this.expirationDate = expirationDate;
 	}
-	
-	protected LocalDate expirationDate;
 	
 	public float getDiscount() {
 		float discount;
