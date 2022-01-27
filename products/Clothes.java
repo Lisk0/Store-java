@@ -9,19 +9,21 @@ public class Clothes extends Product{
 		super(name, brand, price);
 		this.size = size;
 		this.color = color;
-		setDiscount();
 	}
 
 	private char size;
 	private String color;
 	
-	private void setDiscount() {
+	public float getDiscount() {
+		float discount;
 		LocalDate current= LocalDate.now();
 		DayOfWeek d= DayOfWeek.from(current);
 		int value= d.getValue();
 		if(value>=1 && value<=5)
 			discount=0.1f;
 		else discount= 0.0f;
+		
+		return discount;
 	}
 
 }
