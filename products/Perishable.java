@@ -9,12 +9,12 @@ public class Perishable extends Product{
 	public Perishable(String name, String brand, float price, LocalDate expirationDate) {
 		super(name,brand,price);
 		this.expirationDate = expirationDate;
-		setDiscount();
 	}
 	
 	protected LocalDate expirationDate;
 	
-	protected void setDiscount() {
+	public float getDiscount() {
+		float discount;
 		LocalDate current= LocalDate.now();
 		long daysBetween = ChronoUnit.DAYS.between(current, expirationDate);
 		if(daysBetween==0)
@@ -23,6 +23,8 @@ public class Perishable extends Product{
 		else if(daysBetween>0 && daysBetween<=5)
 			discount=0.1f;
 		else discount=0.0f;
+		
+		return discount;
 	}
 	
 	
