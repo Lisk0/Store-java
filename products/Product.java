@@ -10,6 +10,19 @@ public class Product {
 		this.brand = brand;
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return name + " " + brand+ " ";
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public float getDiscount() {
+		return -1f;
+	}
 	
 	
 }
