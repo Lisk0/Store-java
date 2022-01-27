@@ -2,6 +2,7 @@ package products;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Appliance extends Product{
 	
@@ -26,6 +27,11 @@ public class Appliance extends Product{
 		}
 		else discount=0.0f;
 		return discount;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + model + "\n";
 	}
 	
 }
