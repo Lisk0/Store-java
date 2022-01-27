@@ -6,9 +6,13 @@ import products.Product;
 
 public class Cart {
 	private ArrayList<Product> items;
-	private ArrayList<Float> quantity;
+	private ArrayList<Double> quantity;
 	
-	public Cart(ArrayList<Product> items, ArrayList<Float> quantity) {
+	public Cart() {
+		this.items= new ArrayList<Product>();
+		this.quantity= new ArrayList<Double>();
+	}
+	public Cart(ArrayList<Product> items, ArrayList<Double> quantity) {
 		super();
 		this.items = items;
 		this.quantity = quantity;
@@ -18,7 +22,7 @@ public class Cart {
 		return items.get(position);
 	}
 	
-	float getQuantityAt(int position) {
+	double getQuantityAt(int position) {
 		return quantity.get(position);
 	}
 	
@@ -26,7 +30,7 @@ public class Cart {
 		return items.size();
 	}
 	
-	public void addItem(Product a, float b) {
+	public void addItem(Product a, double b) {
 		int index= items.indexOf(a);
 		if(index== -1 ) {
 			items.add(a);
@@ -37,7 +41,7 @@ public class Cart {
 		}
 	}
 	
-	public void removeItem(Product a, float b) {
+	public void removeItem(Product a, double b) {
 		quantity.remove(items.indexOf(a));
 		items.remove(a);
 	}

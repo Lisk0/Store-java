@@ -1,20 +1,25 @@
 package store;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import products.Product;
+import store.Cart;
 
 public class Cashier {
 	
-	void printReceipt(Cart cart, LocalDateTime time) {
+	private static final DecimalFormat df = new DecimalFormat("#.##");
+	//private static final DecimalFormat dfTwoDecimals = new DecimalFormat("0.00");
+	
+	 public static void printReceipt(Cart cart, LocalDateTime time) {
 		
-		float totalCost=0;
-		float totalDiscount=0;
+		double totalCost=0;
+		double totalDiscount=0;
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		System.out.println("Date: " + time.format(formatter));
+		
+		System.out.println("Date: " + time.format(Product.formatterTime));
 		System.out.println();
 		
 		System.out.println("---Products---");
@@ -22,20 +27,25 @@ public class Cashier {
 		
 		int n= cart.getSize();
 		for(int i=0; i<n; i++) {
+			
 			Product x= cart.getProductAt(i);
-			float ammount= cart.getQuantityAt(i);
-			float cost= x.getPrice()* ammount;
-			String output= ammount + " x " + x.getPrice() + " = $" +
+			System.out.println(x.toString());
+			
+			double ammount= cart.getQuantityAt(i);
+			double cost= Double.valueOf(df.format(x.getPrice()* ammount));
+			totalCost+= cost;
+			
+			String output= df.format(ammount) + " x $" + df.format(x.getPrice()) + " = $" +
 					cost;
 			
 			System.out.println(output);
 			
-			float discount= x.getDiscount();
+			double discount= x.getDiscount(time);
 			
 			if(discount>0) {
-				float dsc= cost* discount;
+				double dsc= Double.valueOf(df.format(cost* discount));
 				totalDiscount-= dsc;
-				System.out.println("#discount "+ discount*100 + "% -"+ dsc);
+				System.out.println("#discount "+ df.format(discount*100) + "% -$"+ dsc);
 			}
 			
 			System.out.println();
@@ -44,11 +54,11 @@ public class Cashier {
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println();
 		
-		System.out.println("SUBTOTAL: $" + totalCost);
-		System.out.println("DISCOUNT: $" + totalDiscount);
+		System.out.println("SUBTOTAL: $" + df.format(totalCost));
+		System.out.println("DISCOUNT: $" + df.format(totalDiscount));
 		System.out.println();
 		
-		System.out.println("TOTAL: $" + (totalCost+ totalDiscount));
+		System.out.println("TOTAL: $" + df.format(totalCost+ totalDiscount));
 	
 	}
 }

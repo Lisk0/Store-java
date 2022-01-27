@@ -1,21 +1,23 @@
 package products;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class Perishable extends Product{
 	
 	protected LocalDate expirationDate;
 
-	public Perishable(String name, String brand, float price, LocalDate expirationDate) {
+	public Perishable(String name, String brand, double price, LocalDate expirationDate) {
 		super(name,brand,price);
 		this.expirationDate = expirationDate;
 	}
 	
-	public float getDiscount() {
-		float discount;
-		LocalDate current= LocalDate.now();
-		long daysBetween = ChronoUnit.DAYS.between(current, expirationDate);
+	@Override
+	public double getDiscount(LocalDateTime current) {
+		double discount;
+		LocalDate date=current.toLocalDate();
+		long daysBetween = ChronoUnit.DAYS.between(date, expirationDate);
 		if(daysBetween==0)
 			discount=0.5f;
 		
